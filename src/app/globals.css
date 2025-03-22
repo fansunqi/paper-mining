@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body { background-color: #f8f9fa; }
+
+/* 为块级公式设置合适的显示样式，避免换行 */
+.math-block {
+  display: inline !important; /* 块级公式改为内联 */
+  margin: 0; /* 移除额外的外边距 */
+  padding: 0; /* 移除额外的内边距 */
+}
+
+/* 为内联公式设置内联显示样式 */
+.math-inline {
+  display: inline !important; /* 保证内联公式在行内显示 */
+  font-size: 1em; /* 保持内联公式的正常字体大小 */
+  vertical-align: middle; /* 确保公式和文本在同一行 */
+}
+
