@@ -16,23 +16,32 @@ export default function Home() {
   const [loading, setLoading] = useState(false); // 加载状态
   const [expandedAbstracts, setExpandedAbstracts] = useState([]); // 追踪哪些论文的摘要被展开
   const [selectedTab, setSelectedTab] = useState("pdf"); // 追踪当前选中的标签
-  const API_URL = "http://localhost:8000/pdf-papers/"; // 后端 API 地址
+  const API_URL = "/pdf.json"; // 指向 public/meta.json
 
-  // 加载当前页数据
   const fetchPapers = async (currentPage) => {
     setLoading(true);
     try {
-      const response = await fetch(`${API_URL}?page=${currentPage}&page_size=${pageSize}`);
-      const data = await response.json();
-      setPapers(data.data);
-      setTotal(data.total);
+      const response = await fetch(API_URL); // 直接从 public 目录获取 meta.json
+      const data = await response.json(); // 直接解析为数组
+  
+      if (!Array.isArray(data)) {
+        throw new Error("数据格式错误：期望是一个数组");
+      }
+  
+      console.log("Fetched data:", data);
+  
+      // 进行分页处理
+      const startIndex = (currentPage - 1) * pageSize;
+      const paginatedData = data.slice(startIndex, startIndex + pageSize);
+  
+      setPapers(paginatedData);
+      setTotal(data.length); // 计算总数
     } catch (error) {
-      console.error("API 请求失败:", error);
+      console.error("数据读取失败:", error);
     } finally {
       setLoading(false);
     }
   };
-
   // 初始化加载第一页数据
   useEffect(() => {
     fetchPapers(page);
