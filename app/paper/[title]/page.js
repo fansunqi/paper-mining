@@ -1,10 +1,11 @@
 // app/page.js
 
 "use client"; // 确保这是客户端组件
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function PaperDetail() {
   const searchParams = useSearchParams(); // 获取查询参数
+  const router = useRouter(); // 用于导航
 
   // 从查询参数中获取 title 和 paper 数据
   const title = searchParams.get("title"); // 获取论文标题
@@ -75,6 +76,16 @@ export default function PaperDetail() {
             </div>
           </section>
         )}
+      </div>
+
+      {/* 返回列表页按钮 */}
+      <div className="text-center mt-12">
+        <button
+          onClick={() => router.push("/")} // 返回列表页
+          className="px-6 py-3 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition duration-200"
+        >
+          返回列表页
+        </button>
       </div>
     </div>
   );

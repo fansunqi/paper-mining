@@ -254,25 +254,6 @@ export default function Home() {
                     </button>
                   </div>
 
-                  {/* 详情按钮 */}
-                  {/* <a href={`/paper/${paper.title}`} className="mt-6 block text-center px-6 py-3 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition duration-200">
-                    📖 查看详情 →
-                  </a> */}
-
-                  {/* <Link
-                    href={{
-                      pathname: `/paper/${encodeURIComponent(paper.title)}`,
-                      query: { title: paper.title }, // 可选的 URL 参数
-                    }}
-                    as={`/paper/${encodeURIComponent(paper.title)}`}
-                    state={{ paper }} // 传递整个 paper 对象
-                    legacyBehavior
-                  >
-                    <a className="mt-6 block text-center px-6 py-3 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition duration-200">
-                      📖 查看详情 →
-                    </a>
-                  </Link> */}
-
                   <Link legacyBehavior
                     href={{
                       pathname: `/paper/${encodeURIComponent(paper.title)}`,
